@@ -5,6 +5,7 @@
 font pango:monospace 14
 set $mod Mod4
 set $alt Mod1
+set $resize ~/.config/i3/scripts/resize-window.py
 
 # ------------------- #
 # ---- Workspace ---- #
@@ -19,7 +20,9 @@ exec --no-startup-id nm-applet
 # --- Startup apps
 
 exec --no-startup-id nitrogen --restore
+exec_always --no-startup-id pkill picom; sleep 0.2; picom --no-use-damage
 exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id autotiling
 
 # Workspaces names
 set $ws1 "1"
@@ -39,8 +42,32 @@ floating_modifier $mod
 
 # Windows Configuration
 for_window [class="^.*"] border pixel 5
-gaps inner 10
-gaps outer 15
+gaps inner 15
+gaps outer 10
+
+# Centrar ventanas cuando pasan a modo floating
+
+# General: Floating Windows Rules
+for_window [class="pwvucontrol"] floating enable
+for_window [class="system-config-printer"] floating enable
+for_window [title="Extract"] floating enable, move position center
+
+# PCSX2: Floating Windows Rules
+for_window [class="pcsx2-qt" title="PCSX2 Settings"] exec --no-startup-id "$resize 70 70"
+for_window [class="pcsx2-qt" title="SCES.*"] exec --no-startup-id "$resize 60 60"
+for_window [class="pcsx2-qt" title="SLES.*"] exec --no-startup-id "$resize 60 80"
+for_window [class="pcsx2-qt" title="SLUS.*"] exec --no-startup-id "$resize 60 80"
+for_window [class="pcsx2-qt" title="PCSX2 Controller Settings"] exec --no-startup-id "$resize 50 50"
+
+# Steam: Floating Windows Rules
+for_window [class=".*steam.*" title="Steam Settings"] floating enable, move position center 
+for_window [class=".*steam.*" title="Friends List"] floating enable, move position center
+for_window [class=".*steam.*" title="Special Offers"] floating enable, move position center
+for_window [class=".*steam.*" title="Game Servers"] floating enable, move position center
+for_window [class=".*steam.*" title="Players"] floating enable, move position center
+for_window [class=".*steam.*" title="Add Non-Steam Game"] floating enable, move position center
+for_window [class=".*steam.*" title="System Report"] floating enable, move position center
+for_window [class=".*steam.*" title="Steam Runtime System Information"] floating enable, move position center
 
 # --------------------- #
 # ---- Keybindings ---- #
@@ -60,6 +87,11 @@ bindsym XF86AudioMicMute exec --no-startup-id ~/.config/i3/scripts/micmute-toggl
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/volume-control.sh up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/volume-control.sh down
 bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/scripts/audiomute-toggle.sh toggle
+
+
+# Brightness Configuration
+bindsym XF86MonBrightnessUp exec ~/.config/i3/scripts/brightness-control.sh up
+bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/brightness-control.sh down
 
 # --- Windows
 
@@ -100,7 +132,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 
 # Windows Mode
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+space floating toggle, move position center
 bindsym $mod+space focus mode_toggle 
 bindsym $mod+f fullscreen toggle
 
@@ -109,12 +141,13 @@ bindsym $mod+q kill
 
 # resize windows
 bindsym $mod+r mode "resize"
-mode "resize" {
+mode "resize" 
+{
 	# Arrow keys
-	bindsym Left  resize shrink width 5 px or 5 ppt
+	bindsym Left resize shrink width 5 px or 5 ppt
 	bindsym Right resize grow width 5 px or 5 ppt
-	bindsym Down  resize grow height 5 px or 5 ppt
-	bindsym Up    resize shrink height 5 px or 5 ppt
+	bindsym Down resize grow height 5 px or 5 ppt
+	bindsym Up resize shrink height 5 px or 5 ppt
 
 	# Exit resize mode
 	bindsym Return mode "default"
@@ -127,10 +160,24 @@ bindsym $mod+a focus parent
 # bindsym $mod+d focus child
 
 # --- Programs
+bindsym $alt+o exec md.obsidian.Obsidian
 bindsym $alt+c exec code
 bindsym $alt+Return exec kitty
 bindsym $alt+z exec app.zen_browser.zen
+bindsym $alt+e exec nemo
 
 # Apps Menu
 bindsym $alt+space exec "rofi -show drun"
 
+# ---------------- #
+# ---- Colors ---- #
+# ---------------- #
+
+# class                 border    backgr.   text      indicator   child_border
+client.focused          #e4cf34 #ae752c #ffffff #d7a628   #d7a628
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff

@@ -9,7 +9,7 @@ elif [ "$1" = "off" ]; then
     pactl set-sink-mute "$SINK" 0
 fi
 
-sleep 0.3
+sleep 0.2
 
 if pactl get-sink-mute "$SINK" | grep -q "yes"; then
     brightnessctl -d "$LED" set 1

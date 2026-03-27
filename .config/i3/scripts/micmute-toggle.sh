@@ -4,7 +4,7 @@ SOURCE="@DEFAULT_SOURCE@"
 LED="platform::micmute"
 
 pactl set-source-mute "$SOURCE" toggle
-sleep 0.3
+sleep 0.2
 
 if pactl get-source-mute "$SOURCE" | grep -q "yes"; then
     brightnessctl -d "$LED" set 1

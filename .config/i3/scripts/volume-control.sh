@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SINK="@DEFAULT_SINK@"
-STEP=5
+STEP=1
 MAX=100
 
 direction="$1"

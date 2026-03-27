@@ -1,2 +1,2 @@
-# windots
-my Windows Configuration
+# dorfiles
+Aqui se encuentran almacenados mis archivos de configuracion de Linux
