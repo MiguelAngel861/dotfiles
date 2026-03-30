@@ -1,0 +1,205 @@
+/* =====================================================
+   Power Menu Horizontal - Solo Iconos Grandes
+   Adaptado del estilo adi1090x para tu rice cálido-minimal
+   ===================================================== */
+configuration {
+    show-icons:                 false;
+}
+
+* {
+    font: "JetBrainsMono Nerd Font 10";
+
+    bg:          #1f1a17;
+    bg-alt:      #2c2520;
+    fg:          #f5f0e8;
+    primary:     #ffbf00;
+    accent:      #ffb347;
+    urgent:      #ff6b4a;
+    border-col:  #ffbf00;
+
+    background-color: @bg;
+    text-color:       @fg;
+    border-color:     @border-col;
+}
+
+window {
+    transparency: "real";
+    cursor: "default";
+
+    enabled: true;
+    location: center;
+    anchor:   center;
+    fullscreen: false;
+
+    padding:  0px;
+    margin:   0px;
+    width:    1050px;
+    x-offset: 0px;
+    y-offset: 0px;
+
+    border:   2px solid;
+
+    border-color: @border-col;
+    background-color: @bg;
+    
+}
+
+mainbox {
+    enabled: true;
+    children: [ inputbar, listview ];
+
+    padding: 30px;
+    spacing: 15px;
+    margin: 0px;
+    border: 0px solid;
+    border-radius: 0px;
+
+    border-color: @border-col;
+    background-color: transparent;
+}
+
+/* Input Bar */
+inputbar {
+    enabled: true;
+    children: [ textbox-prompt-colon, prompt ];
+
+    spacing: 15px;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    border-radius: 0px;
+
+    background-color: transparent;
+    border-color:     @border-col;
+    text-color: @fg;
+}
+
+dummy { background-color: transparent; }
+
+textbox-prompt-colon {
+    enabled: true;
+    expand: false;
+
+    str: "⏻";
+
+    margin: 0px;
+    padding: 0px;
+    height: 58px;
+    width: 58px;
+    border-radius: 0px;
+    border: 0px solid;
+    horizontal-align: 0.5;
+    vertical-align:   0.5;
+
+    background-color: @urgent;
+    text-color: @bg;
+
+    text-align: center;
+}
+prompt {
+    enabled: true;
+
+    padding: 12px;
+    border-radius: 0px;
+
+    background-color: @accent;
+    text-color: @bg;
+}
+ /* Message */
+
+message {
+    enabled: true;
+
+    margin: 0px;
+    padding: 12px;
+    border-radius: 0px;
+    border: 0px solid;
+
+    border-color: @border-col;
+    background-color: @bg-alt;
+    text-color: @fg;
+}
+
+textbox {
+    enabled: true;
+    blink: true;
+    markup: true;
+
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+
+    background-color: inherit;
+    text-color: inherit;
+    placeholder-color: @fg;
+}
+
+error-message {
+    padding: 12px;
+    border: 0px solid;
+    border-radius: 0px;
+
+    border-color: @border-col;
+    background-color: @bg;
+    text-color: @fg;
+}
+ /* List View */
+
+listview {
+    cursor: "default";
+    enabled: true;
+    cycle: true;
+    dynamic: true;
+    fixed-height: true;
+    fixed-columns: true;
+    scrollbar: false;
+    reverse: false;
+    layout: vertical;
+
+    columns:        5;
+    lines:          1;
+
+    spacing:        15px;
+    padding:        0px;
+    margin:         0px;
+    border:         0px solid;
+    border-radius:  0px;
+
+    background-color: transparent;
+    text-color: @fg;
+}
+
+/* Elements */
+
+element {
+    enabled: true;
+    cursor: pointer;
+
+    spacing:       0px;
+    margin:        0px;
+    padding:       40px 10px;
+    border:        0px solid;
+    border-radius: 0px;
+
+    text-color: @fg;
+    background-color: @bg-alt;
+
+
+}
+
+element-text {
+    font: "JetBrainsMono Nerd Font Bold 34";
+    cursor: inherit;
+
+    horizontal-align: 0.5;
+    vertical-align:   0.5;
+
+    background-color: transparent;
+    text-color: inherit;
+
+}
+
+element selected.normal {
+    background-color: @primary;
+    text-color: #1f1a17;
+}
+

@@ -1,0 +1,12 @@
+@theme "~/.config/rofi/themes/warm-minimal.rasi"
+
+configuration {
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    display-drun: "launch: ";
+    display-window: "  ";
+    display-ssh: "󰣀  ";
+    modi: "drun,window,ssh";
+    font: "JetBrainsMono Nerd Font 13";
+    terminal: "kitty";
+}

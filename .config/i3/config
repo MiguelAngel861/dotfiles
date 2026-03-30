@@ -23,6 +23,7 @@ exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id pkill picom; sleep 0.2; picom --no-use-damage
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id autotiling
+exec --no-startup-id flameshot
 
 # Workspaces names
 set $ws1 "1"
@@ -41,9 +42,11 @@ tiling_drag modifier titlebar
 floating_modifier $mod
 
 # Windows Configuration
-for_window [class="^.*"] border pixel 5
-gaps inner 15
-gaps outer 10
+for_window [class="^.*"] border pixel 4
+
+gaps inner 12
+gaps outer 8
+
 
 # Centrar ventanas cuando pasan a modo floating
 
@@ -57,7 +60,7 @@ for_window [class="pcsx2-qt" title="PCSX2 Settings"] exec --no-startup-id "$resi
 for_window [class="pcsx2-qt" title="SCES.*"] exec --no-startup-id "$resize 60 60"
 for_window [class="pcsx2-qt" title="SLES.*"] exec --no-startup-id "$resize 60 80"
 for_window [class="pcsx2-qt" title="SLUS.*"] exec --no-startup-id "$resize 60 80"
-for_window [class="pcsx2-qt" title="PCSX2 Controller Settings"] exec --no-startup-id "$resize 50 50"
+for_window [class="pcsx2-qt" title="PCSX2 Controller Settings"] exec --no-startup-id "$resize 70 70"
 
 # Steam: Floating Windows Rules
 for_window [class=".*steam.*" title="Steam Settings"] floating enable, move position center 
@@ -90,8 +93,12 @@ bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/scripts/audiomute-toggle
 
 
 # Brightness Configuration
-bindsym XF86MonBrightnessUp exec ~/.config/i3/scripts/brightness-control.sh up
-bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/brightness-control.sh down
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/brightness-control.sh up
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/brightness-control.sh down
+
+# Screenshot Tools
+bindsym Print exec --no-startup-id flameshot gui
+bindsym $mod+Print exec --no-startup-id flameshot full --clipboard
 
 # --- Windows
 
@@ -141,8 +148,7 @@ bindsym $mod+q kill
 
 # resize windows
 bindsym $mod+r mode "resize"
-mode "resize" 
-{
+mode "resize" {
 	# Arrow keys
 	bindsym Left resize shrink width 5 px or 5 ppt
 	bindsym Right resize grow width 5 px or 5 ppt
@@ -167,17 +173,32 @@ bindsym $alt+z exec app.zen_browser.zen
 bindsym $alt+e exec nemo
 
 # Apps Menu
-bindsym $alt+space exec "rofi -show drun"
+bindsym $alt+space exec "rofi -show drun -theme ~/.config/rofi/themes/warm-minimal.rasi"
 
 # ---------------- #
 # ---- Colors ---- #
 # ---------------- #
 
-# class                 border    backgr.   text      indicator   child_border
-client.focused          #e4cf34 #ae752c #ffffff #d7a628   #d7a628
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+# ==================== COLORES MINIMALISTAS ====================
 
-client.background       #ffffff
+# ==================== ESQUEMA CÁLIDO MINIMALISTA ====================
+
+set $bg         #1f1a17     
+set $bg2        #2c2520     
+set $fg         #f5f0e8     
+set $accent     #ffbf00     
+set $accent2    #ffb347     
+set $urgent     #ff6b4a     
+set $inactive   #555555     
+
+# class                 border          background      text            indicator       child_border
+client.focused          $accent         $bg             $fg             $accent2        $accent
+client.focused_inactive $bg2            $bg2            $fg             $inactive       $bg2
+client.unfocused        $bg2            $bg2            #888888         $inactive       $bg2
+client.urgent           $urgent         $urgent         $fg             $urgent         $urgent
+client.placeholder      $bg             $bg             $fg             $bg             $bg
+client.background       $bg
+
+set $gray_dark     #777777
+
+
