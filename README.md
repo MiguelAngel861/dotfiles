@@ -1,7 +1,22 @@
  # dotfiles
 Aqui se encuentran almacenados mis archivos de configuracion de Linux
 
-![Texto alternativo](./image.png)
+
+<div align="center">
+  <img src="./assets/desktop.png" alt="desktop" width="100%"/>
+</div>
+
+<div align="center">
+  <img src="assets/cli-rice.png" alt="VSCode" width="49%"/>
+  <img src="assets/desktop-fetch.png" alt="Startpage" width="49%"/>
+</div>
+
+<div align="center">
+  <img src="assets/listen-music.png" alt="Windhawk" width="49%"/>
+  <img src="assets/nvim.png" alt="" width="49%"/>
+</div>
+
+
 ## Inspiraciones Tomadas
 ### Desktops
 - [r/unixporn // arya71 - [i3] Made some changes](https://www.reddit.com/r/unixporn/comments/1mjhqxp/i3_made_some_changes/) | [dotfiles](https://github.com/aryaio/i3wm-config/tree/main)
