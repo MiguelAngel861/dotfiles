@@ -6,6 +6,7 @@ font pango:monospace 14
 set $mod Mod4
 set $alt Mod1
 set $resize ~/.config/i3/scripts/resize-window.py
+set $resize_mark __resize_target
 
 # ------------------- #
 # ---- Workspace ---- #
@@ -15,7 +16,6 @@ set $resize ~/.config/i3/scripts/resize-window.py
 
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nm-applet
 
 # --- Startup apps
 
@@ -51,16 +51,20 @@ gaps outer 8
 # Centrar ventanas cuando pasan a modo floating
 
 # General: Floating Windows Rules
-for_window [class="pwvucontrol"] floating enable
+for_window [class="kitty" title="wiremix"] floating enable, mark --replace $resize_mark, exec --no-startup-id "$resize 50 80 $resize_mark"
+for_window [class="kitty" title="impala"] floating enable, mark --replace $resize_mark, exec --no-startup-id "$resize 50 80 $resize_mark"
+for_window [class="kitty" title="bluetui"] floating enable, mark --replace $resize_mark, exec --no-startup-id "$resize 50 80 $resize_mark"
 for_window [class="system-config-printer"] floating enable
 for_window [title="Extract"] floating enable, move position center
+for_window [class="mpv"] floating enable
+for_window [class="Nsxiv"] floating enable
 
 # PCSX2: Floating Windows Rules
-for_window [class="pcsx2-qt" title="PCSX2 Settings"] exec --no-startup-id "$resize 70 70"
-for_window [class="pcsx2-qt" title="SCES.*"] exec --no-startup-id "$resize 60 60"
-for_window [class="pcsx2-qt" title="SLES.*"] exec --no-startup-id "$resize 60 80"
-for_window [class="pcsx2-qt" title="SLUS.*"] exec --no-startup-id "$resize 60 80"
-for_window [class="pcsx2-qt" title="PCSX2 Controller Settings"] exec --no-startup-id "$resize 70 70"
+for_window [class="pcsx2-qt" title="PCSX2 Settings"] floating enable, mark --replace $resize_mark, exec --no-startup-id "$resize 50 70 $resize_mark"
+for_window [class="pcsx2-qt" title="SCES.*"] floating  enable, mark --replace $resize_mark, exec --no-startup-id "$resize 50 70 $resize_mark"
+for_window [class="pcsx2-qt" title="SLES.*"] floating enable, mark --replace $resize_mark, exec --no-startup-id "$resize 50 70 $resize_mark"
+for_window [class="pcsx2-qt" title="SLUS.*"] floating enable, mark --replace $resize_mark, exec --no-startup-id "$resize 50 70 $resize_mark"
+for_window [class="pcsx2-qt" title="PCSX2 Controller Settings"] floating enable, mark --replace $resize_mark, exec --no-startup-id "$resize 70 65 $resize_mark"
 
 # Steam: Floating Windows Rules
 for_window [class=".*steam.*" title="Steam Settings"] floating enable, move position center 
@@ -174,6 +178,7 @@ bindsym $alt+e exec nemo
 
 # Apps Menu
 bindsym $alt+space exec "rofi -show drun -theme ~/.config/rofi/themes/warm-minimal.rasi"
+#bindsym $alt+space exec "rofi -show drun"
 
 # ---------------- #
 # ---- Colors ---- #
